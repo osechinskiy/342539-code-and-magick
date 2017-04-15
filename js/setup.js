@@ -56,58 +56,49 @@ var setupClose = setup.querySelector('.setup-close');
 var setupSubmit = setup.querySelector('.setup-submit');
 var setupUserNname = setup.querySelector('.setup-user-name');
 
-var onModalWindowOpen = function(){
-setup.classList.remove('hidden');
+var onModalWindowOpen = function () {
+  setup.classList.remove('hidden');
 };
-var onModalWindowClose = function(){
-setup.classList.add('hidden');
+var onModalWindowClose = function () {
+  setup.classList.add('hidden');
 };
-var onModalWindowEscPress = function(evt) {
+var onModalWindowEscPress = function (evt) {
   if (evt.keyCode === 27) {
     onModalWindowClose();
   }
 };
-setupOpen.addEventListener('click', function() {
+setupOpen.addEventListener('click', function () {
   onModalWindowOpen();
-  document.addEventListener('keydown', onModalWindowEscPress)
+  document.addEventListener('keydown', onModalWindowEscPress);
 });
-setupOpen.addEventListener('keydown', function(evt) {
-if (evt.keyCode === 13) {
-  onModalWindowOpen();
-}
+setupOpen.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === 13) {
+    onModalWindowOpen();
+  }
 });
 
-setupClose.addEventListener('click', function() {
+setupClose.addEventListener('click', function () {
   setup.classList.add('hidden');
-  });
-
-
-setupClose.addEventListener('keydown', function(evt) {
-if (evt.keyCode === 13) {
-  onModalWindowClose()
-}
 });
+
+
+setupClose.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === 13) {
+    onModalWindowClose();
+  }
+});
+
 setupUserNname.removeEventListener('keydown', onModalWindowEscPress);
 
 
-  setupSubmit.addEventListener('click', function() {
-    if (setupSubmit.valid) {
+setupSubmit.addEventListener('click', function () {
+  if (setupSubmit.valid) {
     onModalWindowClose();
   }
-  });
+});
 
-  setupSubmit.addEventListener('keydown', function(evt) {
+setupSubmit.addEventListener('keydown', function (evt) {
   if (setupSubmit.valid & evt.keyCode === 13) {
     onModalWindowClose();
-    }
-  });
-
-
-// setupSubmit.addEventListener('click', function() {
-//   setup.classList.add('hidden');
-// setupSubmit.addEventListener('keydown', function(evt) {
-// if (evt.keyCode === 13) {
-//   setup.classList.add('hidden');
-//   }
-// });
-// });
+  }
+});
