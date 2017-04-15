@@ -1,26 +1,27 @@
 'use strict';
 
 var userDialog = document.querySelector('.setup');
-userDialog.classList.remove('hidden');
+// userDialog.classList.remove('hidden');
 
 var wizardNames = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
 var wizardSurname = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
 var wizardCoatColor = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var wizardEyesColor = ['black', 'red', 'blue', 'yellow', 'green'];
 
+function generateRandInd(set) {
+  var randInt = Math.floor(Math.random() * (set.length));
+  return set[randInt];
+}
+
 function generedWizards(n) {
   var wizards = [];
   for (var i = 0; i < n; i++) {
-    var nameRand = Math.floor(Math.random() * (wizardNames.length));
-    var surnameRand = Math.floor(Math.random() * (wizardSurname.length));
-    var coatColorRand = Math.floor(Math.random() * (wizardCoatColor.length));
-    var eyesColorRand = Math.floor(Math.random() * (wizardEyesColor.length));
     wizards.push(
       {
-        name: wizardNames[nameRand],
-        surname: wizardSurname[surnameRand],
-        coatColor: wizardCoatColor[coatColorRand],
-        eyesColor: wizardEyesColor[eyesColorRand]
+        name: generateRandInd(wizardNames),
+        surname: generateRandInd(wizardSurname),
+        coatColor: generateRandInd(wizardCoatColor),
+        eyesColor: generateRandInd(wizardEyesColor)
       }
     );
   }
@@ -55,6 +56,24 @@ var setup = document.querySelector('.setup');
 var setupClose = setup.querySelector('.setup-close');
 var setupSubmit = setup.querySelector('.setup-submit');
 var setupUserNname = setup.querySelector('.setup-user-name');
+var wizard = document.querySelector('#wizard');
+var wizardCoat = wizard.querySelector('#wizard-coat');
+var wizardEyes = wizard.querySelector('#wizard-eyes');
+var wizardFireball = document.querySelector('.setup-fireball-wrap');
+var fireball = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
+
+
+wizardCoat.addEventListener('click', function () {
+  wizardCoat.style.fill = generateRandInd(wizardCoatColor);
+});
+
+wizardEyes.addEventListener('click', function () {
+  wizardEyes.style.fill = generateRandInd(wizardEyesColor);
+});
+
+wizardFireball.addEventListener('click', function () {
+  wizardFireball.style.fill = generateRandInd(fireball);
+});
 
 var onModalWindowOpen = function () {
   setup.classList.remove('hidden');
@@ -71,6 +90,7 @@ setupOpen.addEventListener('click', function () {
   onModalWindowOpen();
   document.addEventListener('keydown', onModalWindowEscPress);
 });
+
 setupOpen.addEventListener('keydown', function (evt) {
   if (evt.keyCode === 13) {
     onModalWindowOpen();
